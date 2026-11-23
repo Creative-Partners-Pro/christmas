@@ -2,7 +2,23 @@
 <html class="dark" lang="ru"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>МЕГА-Мороз — Новогодний маркет 2026–2027, Тбилиси</title>
+<title>МЕГА-Мороз — Новогодние программы и мастер-классы в Тбилиси</title>
+<meta name="description" content="Соберите новогодний праздник в Тбилиси: Дед Мороз и Снегурочка, игровые программы, квесты, крио-шоу и творческие мастер-классы. Выберите услуги и рассчитайте стоимость онлайн.">
+<meta name="theme-color" content="#070B14">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_GE">
+<meta property="og:site_name" content="МЕГА-Мороз">
+<meta property="og:title" content="Новогодний праздник в Тбилиси. Соберите свою программу!">
+<meta property="og:description" content="Дед Мороз и Снегурочка, игровые программы, квесты, шоу и мастер-классы. Выберите формат и узнайте предварительную стоимость за пару минут.">
+<meta property="og:url" content="https://creative-partners-pro.github.io/christmas/">
+<meta property="og:image" content="https://creative-partners-pro.github.io/christmas/assets/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="МЕГА-Мороз. Новогодние программы и мастер-классы в Тбилиси">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="МЕГА-Мороз — Новогодний праздник в Тбилиси">
+<meta name="twitter:description" content="Выберите программу, добавьте шоу и мастер-классы, рассчитайте стоимость онлайн.">
+<meta name="twitter:image" content="https://creative-partners-pro.github.io/christmas/assets/og-cover.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
@@ -12,7 +28,7 @@ tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-obsidian":"#07
 <style>
 :root{color-scheme:dark;box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
 html,body{margin:0;background:#070B14;color:#F8FAFC;font-family:'Inter','Noto Sans Georgian',sans-serif}
-body{overscroll-behavior-y:none;min-height:100dvh}
+body{overscroll-behavior-y:none;min-height:100dvh}.page-locked{position:fixed!important;width:100%;overflow:hidden!important}
 .pb-safe{padding-bottom:env(safe-area-inset-bottom,0px)}.pt-safe{padding-top:env(safe-area-inset-top,0px)}
 ::-webkit-scrollbar{display:none}.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
 :focus-visible{outline:2px solid #38BDF8;outline-offset:2px}
@@ -28,8 +44,9 @@ body{overscroll-behavior-y:none;min-height:100dvh}
 input,select,textarea{background:rgba(30,41,59,.85);border:0;border-radius:12px;padding:10px 14px;width:100%;color:#F8FAFC;font-size:14px}
 input:focus,select:focus,textarea:focus{outline:none;box-shadow:0 10px 16px -10px rgba(56,189,248,.9)}
 details>summary{cursor:pointer;color:#38BDF8;font-weight:700;font-size:12px}
-[class~="border"]{border-width:0!important}
 button[data-a="kd"],button[data-a="ki"],button[data-a="nd"],button[data-a="ni"]{background:rgba(255,255,255,.08)}
+#timerDock{position:fixed;z-index:39;top:calc(env(safe-area-inset-top,0px) + 99px);left:0;right:0;max-width:576px;margin:0 auto;padding:0 16px;pointer-events:none}#timerDock #timerPanel{pointer-events:auto;padding:7px 12px;border-radius:0 0 16px 16px;display:flex;align-items:center;gap:10px}#timerDock #timerPanel .grid{display:flex;gap:5px;flex:1}#timerDock #timerPanel .drum-slot{height:30px;min-width:0;border-radius:7px}#timerDock #timerPanel .drum-digit{font-size:15px}#timerDock #timerPanel .grid>div{display:flex;align-items:center;gap:3px;flex:1}#timerDock #timerPanel .grid>div>span{font-size:8px;margin:0!important}#timerDock #timerPanel .mb-3\.5{margin:0!important}#timerDock #timerPanel .flex.items-center.gap-2.mb-3\.5{margin:0!important;white-space:nowrap}#timerDock #timerPanel .absolute{display:none}
+@media(max-width:420px){#timerDock{top:calc(env(safe-area-inset-top,0px) + 99px)}#timerDock #timerPanel{gap:6px;padding:6px 8px}#timerDock #timerPanel .drum-digit{font-size:13px}}
 </style></head>
 <body class="bg-surface-obsidian text-text-primary relative selection:bg-neon-ice selection:text-surface-obsidian">
 <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -38,15 +55,17 @@ button[data-a="kd"],button[data-a="ki"],button[data-a="nd"],button[data-a="ni"]{
 <div class="absolute top-2/3 -left-20 w-80 h-80 rounded-full bg-coral-berry/15 blur-[105px]"></div></div>
 
 <header class="fixed top-0 inset-x-0 z-40 pt-safe bg-[#070B14]/80 backdrop-blur-2xl shadow-[0_14px_24px_-18px_rgba(56,189,248,0.6)]">
-<div class="h-9 px-4 flex items-center justify-between bg-surface-indigo-depth/60 text-xs text-text-secondary">
-<div class="flex items-center gap-1.5"><span class="font-bold tracking-wider text-neon-ice uppercase font-headline text-[11px]">Tbilisi Hub</span><span class="text-text-muted font-mono text-[11px]" id="clock">--:--:-- UTC+4</span></div>
+<div class="h-9 px-4 flex items-center justify-between bg-surface-indigo-depth/60 text-xs text-text-secondary gap-2">
+<div class="flex items-center gap-1.5 min-w-0"><span class="font-bold tracking-wider text-neon-ice uppercase font-headline text-[11px]">Tbilisi Hub</span><span class="text-text-muted font-mono text-[11px]" id="clock">--:--:-- UTC+4</span></div>
+<div class="flex items-center p-0.5 rounded-xl bg-surface-indigo-depth/80 border border-white/10 shrink-0" id="langs"></div>
 </div>
 <div class="h-[60px] px-4 flex items-center gap-2.5">
 <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-cyan-500 via-neon-ice to-deep-indigo p-[1.5px] shadow-[0_0_16px_rgba(56,189,248,0.4)] shrink-0"><div class="w-full h-full bg-[#070b14] rounded-[14px] flex items-center justify-center"><span class="material-symbols-outlined text-neon-ice text-[22px]">ac_unit</span></div></div>
 <div class="flex flex-col min-w-0"><span class="font-headline font-extrabold text-[17px] leading-tight">МЕГА-Мороз</span><span class="text-[11px] text-neon-ice/80 font-medium truncate" data-i="brandSub"></span></div>
-<div class="ml-auto flex items-center p-0.5 rounded-xl bg-surface-indigo-depth/80 border border-white/10" id="langs"></div></div>
+</div>
 </header>
 
+<div id="timerDock" class="hidden"></div>
 <main class="relative z-10 w-full max-w-xl mx-auto px-4" style="padding-top:calc(env(safe-area-inset-top,0px) + 100px);padding-bottom:190px">
 <div id="fbar" class="sticky z-30 -mx-4 px-4 py-2 mb-3 bg-[#070B14]/80 backdrop-blur-xl shadow-[0_12px_20px_-16px_rgba(56,189,248,0.5)]" style="top:calc(env(safe-area-inset-top,0px) + 96px)"><div class="flex gap-2 overflow-x-auto no-scrollbar pb-3 -mb-1" id="filters" role="group"></div></div>
 
@@ -54,14 +73,14 @@ button[data-a="kd"],button[data-a="ki"],button[data-a="nd"],button[data-a="ni"]{
 <h1 class="font-headline font-extrabold text-[26px] leading-[32px] tracking-tight" data-i="h1"></h1>
 </section>
 
-<section class="mb-6"><div class="liquid-glass-glow rounded-3xl p-4 relative overflow-hidden">
+<div id="timerHome"><section class="mb-6"><div id="timerPanel" class="liquid-glass-glow rounded-3xl p-4 relative overflow-hidden">
 <div class="absolute -top-12 -left-12 w-32 h-32 rounded-full bg-neon-ice/20 blur-2xl pointer-events-none"></div>
 <div class="flex items-center gap-2 mb-3.5 relative z-10"><span class="w-2 h-2 rounded-full bg-coral-berry animate-pulse"></span><span class="text-xs font-bold uppercase tracking-wider text-neon-ice font-headline" data-i="cd"></span></div>
 <div class="grid grid-cols-4 gap-2 text-center relative z-10">
 <div><div class="w-full h-16 drum-slot liquid-glass" id="drum-days"><span class="drum-digit" id="digit-days">00</span></div><span class="text-[10px] font-bold tracking-wider uppercase text-text-muted mt-2 block" data-i="dd"></span></div>
 <div><div class="w-full h-16 drum-slot liquid-glass" id="drum-hours"><span class="drum-digit" id="digit-hours">00</span></div><span class="text-[10px] font-bold tracking-wider uppercase text-text-muted mt-2 block" data-i="hh"></span></div>
 <div><div class="w-full h-16 drum-slot liquid-glass" id="drum-minutes"><span class="drum-digit" id="digit-minutes">00</span></div><span class="text-[10px] font-bold tracking-wider uppercase text-text-muted mt-2 block" data-i="mm"></span></div>
-<div><div class="w-full h-16 drum-slot liquid-glass border-neon-ice/60" id="drum-seconds"><span class="drum-digit text-white" id="digit-seconds">00</span></div><span class="text-[10px] font-bold tracking-wider uppercase text-coral-berry mt-2 block" data-i="ss"></span></div></div></div></section>
+<div><div class="w-full h-16 drum-slot liquid-glass border-neon-ice/60" id="drum-seconds"><span class="drum-digit text-white" id="digit-seconds">00</span></div><span class="text-[10px] font-bold tracking-wider uppercase text-coral-berry mt-2 block" data-i="ss"></span></div></div></div></section></div>
 
 <div class="p-1 rounded-2xl liquid-glass grid grid-cols-2 gap-1 border-neon-ice/30 mb-4" role="tablist">
 <button class="tab-btn py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5" data-a="tab" data-t="1"><span class="material-symbols-outlined text-[18px]">ac_unit</span><span data-i="tab1"></span></button>
@@ -75,6 +94,23 @@ button[data-a="kd"],button[data-a="ki"],button[data-a="nd"],button[data-a="ni"]{
 <div class="flex flex-col gap-4" id="progs"></div></section>
 <section id="t2" class="hidden flex-col gap-4"><div id="addNote"></div><div class="flex flex-col gap-4" id="adds"></div></section>
 <p class="text-[11px] text-text-muted mt-4" data-i="tg2"></p>
+
+<section class="mt-8 mb-8 flex flex-col gap-3" id="trust">
+ <h2 class="font-headline font-bold text-lg" data-i="trustTitle"></h2>
+ <div class="grid grid-cols-1 gap-3">
+  <article class="p-4 rounded-2xl liquid-glass"><div class="flex items-center gap-2 mb-2"><span class="material-symbols-outlined text-neon-ice">fact_check</span><h3 class="font-headline font-bold text-sm" data-i="trust1t"></h3></div><p class="text-xs text-text-secondary leading-relaxed" data-i="trust1"></p></article>
+  <article class="p-4 rounded-2xl liquid-glass"><div class="flex items-center gap-2 mb-2"><span class="material-symbols-outlined text-neon-ice">event_available</span><h3 class="font-headline font-bold text-sm" data-i="trust2t"></h3></div><p class="text-xs text-text-secondary leading-relaxed" data-i="trust2"></p></article>
+  <article class="p-4 rounded-2xl liquid-glass"><div class="flex items-center gap-2 mb-2"><span class="material-symbols-outlined text-neon-ice">groups</span><h3 class="font-headline font-bold text-sm" data-i="trust3t"></h3></div><p class="text-xs text-text-secondary leading-relaxed" data-i="trust3"></p></article>
+  <article class="p-4 rounded-2xl liquid-glass"><div class="flex items-center gap-2 mb-2"><span class="material-symbols-outlined text-neon-ice">support_agent</span><h3 class="font-headline font-bold text-sm" data-i="trust4t"></h3></div><p class="text-xs text-text-secondary leading-relaxed" data-i="trust4"></p></article>
+ </div>
+</section>
+<footer class="border-t border-white/10 pt-5 pb-4 text-[11px] text-text-muted flex flex-col gap-2" id="siteFooter">
+ <div class="font-headline font-bold text-text-secondary">МЕГА-Мороз · Tbilisi</div>
+ <p data-i="footerText"></p>
+ <div class="flex flex-wrap gap-x-4 gap-y-1"><a class="text-neon-ice" href="https://wa.me/995577258874" target="_blank" rel="noopener">WhatsApp</a><a class="text-neon-ice" href="https://t.me/El_Danial" target="_blank" rel="noopener">Telegram</a></div>
+ <p>© 2026–2027 МЕГА-Мороз</p>
+</footer>
+
 </main>
 
 <div class="fixed bottom-24 inset-x-0 z-30 max-w-xl mx-auto px-4 pointer-events-none"><div class="pointer-events-auto flex items-center justify-between p-3.5 rounded-2xl liquid-glass-glow border-neon-ice/50">
@@ -85,11 +121,11 @@ button[data-a="kd"],button[data-a="ki"],button[data-a="nd"],button[data-a="ni"]{
 <nav class="fixed bottom-0 inset-x-0 z-40 pb-safe bg-[#070b14]/85 backdrop-blur-2xl shadow-[0_-12px_24px_-18px_rgba(56,189,248,0.6)]"><div class="flex justify-around items-center h-20 max-w-xl mx-auto px-2">
 <button class="dock flex flex-col items-center justify-center gap-1 w-20 h-14" data-a="tab" data-t="1"><span class="material-symbols-outlined text-[22px]">festival</span><span class="text-[10px] font-bold" data-i="dk1"></span></button>
 <button class="dock flex flex-col items-center justify-center gap-1 w-20 h-14" data-a="tab" data-t="2"><span class="material-symbols-outlined text-[22px]">auto_awesome</span><span class="text-[10px] font-bold" data-i="dk2"></span></button>
-<button class="flex flex-col items-center justify-center gap-1 w-20 h-14 text-text-secondary" data-a="open"><span class="material-symbols-outlined text-[22px]">shopping_bag</span><span class="text-[10px] font-bold" data-i="dk3"></span></button></div></nav>
+<button class="flex flex-col items-center justify-center gap-1 w-20 h-14 text-text-secondary relative" data-a="cart"><span class="material-symbols-outlined text-[22px]">shopping_bag</span><span class="absolute top-0 right-3 min-w-4 h-4 px-1 rounded-full bg-coral-berry text-[9px] text-white font-bold" id="cartBadge">0</span><span class="text-[10px] font-bold" data-i="cartTitle"></span></button></div></nav>
 
-<div class="fixed inset-0 z-50 bg-[#070b14]/85 backdrop-blur-md hidden flex-col justify-end" id="info" role="dialog" aria-modal="true"><div class="w-full max-w-xl mx-auto liquid-glass-glow rounded-t-3xl p-5 flex flex-col gap-3 max-h-[88vh] overflow-y-auto pb-safe" id="infoBody"></div></div>
+<div class="fixed inset-0 z-50 bg-[#070b14]/85 backdrop-blur-md hidden flex-col justify-end" id="info" role="dialog" aria-modal="true"><div class="w-full max-w-xl mx-auto liquid-glass-glow rounded-t-3xl p-5 flex flex-col gap-3 max-h-[88vh] overflow-y-auto pb-safe" id="infoBody" style="overscroll-behavior:contain"></div></div>
 <div class="fixed inset-0 z-50 bg-[#070b14]/85 backdrop-blur-md hidden flex-col justify-end" id="sheet" role="dialog" aria-modal="true">
-<div class="w-full max-w-xl mx-auto liquid-glass-glow rounded-t-3xl p-5 flex flex-col gap-4 max-h-[90vh] overflow-y-auto pb-safe">
+<div class="w-full max-w-xl mx-auto liquid-glass-glow rounded-t-3xl p-5 flex flex-col gap-4 max-h-[90vh] overflow-y-auto pb-safe" style="overscroll-behavior:contain">
 <div class="w-10 h-1.5 rounded-full bg-white/20 mx-auto"></div>
 <div class="flex items-center justify-between"><div><span class="text-[11px] font-bold uppercase tracking-wider text-neon-ice font-headline" id="stepLbl"></span><h3 class="font-headline font-bold text-lg" data-i="sheetT"></h3></div>
 <button class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center" data-a="close" aria-label="×"><span class="material-symbols-outlined text-[18px]">close</span></button></div>
@@ -97,8 +133,8 @@ button[data-a="kd"],button[data-a="ki"],button[data-a="nd"],button[data-a="ni"]{
 
 <div class="qv flex flex-col gap-4">
 <div><div class="text-xs font-bold text-neon-ice font-headline uppercase tracking-wider mb-2" data-i="whoCome"></div><div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5" id="chars"></div></div>
-<div class="flex items-center justify-between"><div><div class="text-sm font-bold font-headline" data-i="kidsL"></div><div class="text-[11px] text-text-muted" id="kidsNote"></div></div>
-<div class="flex items-center gap-2 p-1 rounded-xl bg-surface-indigo-depth/90 border border-white/10"><button class="w-8 h-8 rounded-lg border border-white/10 font-bold" data-a="kd" aria-label="−">−</button><span class="font-headline font-bold text-sm text-neon-ice min-w-[22px] text-center" id="kidsN">3</span><button class="w-8 h-8 rounded-lg border border-white/10 font-bold" data-a="ki" aria-label="+">+</button></div></div>
+<div class="rounded-xl border border-neon-ice/30 bg-neon-ice/5 p-3"><p class="text-xs font-bold text-neon-ice mb-1" data-i="artistPrice"></p><div class="flex items-center justify-between"><div><div class="text-sm font-bold font-headline" data-i="kidsControl"></div><div class="text-[11px] text-text-secondary" data-i="kidsL"></div><div class="text-[11px] text-text-muted" id="kidsNote"></div></div>
+<div class="flex items-center gap-2 p-1 rounded-xl bg-surface-indigo-depth/90 border border-white/10"><button class="w-8 h-8 rounded-lg border border-white/10 font-bold" data-a="kd" aria-label="−">−</button><span class="font-headline font-bold text-sm text-neon-ice min-w-[22px] text-center" id="kidsN">3</span><button class="w-8 h-8 rounded-lg border border-white/10 font-bold" data-a="ki" aria-label="+">+</button></div></div></div>
 <div><span class="text-xs font-semibold" data-i="ageL"></span><div class="grid grid-cols-2 gap-2 mt-1.5" id="ages"></div></div><div><span class="text-xs font-semibold" data-i="plangL"></span><div class="grid grid-cols-3 gap-2 mt-1.5" id="plang"></div></div></div>
 
 <div class="qv hidden flex-col gap-3">
@@ -123,6 +159,17 @@ button[data-a="kd"],button[data-a="ki"],button[data-a="nd"],button[data-a="ni"]{
 <span class="font-headline font-extrabold text-base text-champagne-gold" id="sheetTot"></span>
 <button class="px-6 py-3 rounded-xl bg-neon-ice text-surface-obsidian font-headline font-bold text-xs shadow-[0_0_14px_rgba(56,189,248,0.4)]" data-a="next" id="nextB" data-i="next"></button></div>
 </div></div>
+
+
+<div class="fixed inset-0 z-[60] bg-[#070b14]/85 backdrop-blur-md hidden flex-col justify-end" id="cartModal" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+ <div class="w-full max-w-xl mx-auto liquid-glass-glow rounded-t-3xl p-5 flex flex-col gap-4 max-h-[88vh] overflow-y-auto pb-safe" style="overscroll-behavior:contain">
+  <div class="w-10 h-1.5 rounded-full bg-white/20 mx-auto"></div>
+  <div class="flex items-center justify-between"><h3 id="cartTitle" class="font-headline font-bold text-lg" data-i="cartTitle"></h3><button class="w-8 h-8 rounded-full bg-white/10" data-a="closecart" aria-label="Close"><span class="material-symbols-outlined">close</span></button></div>
+  <div id="cartItems" class="flex flex-col gap-2"></div>
+  <div class="flex items-center justify-between border-t border-white/10 pt-3"><span class="text-sm text-text-secondary" data-i="total"></span><b id="cartTotal" class="font-headline text-xl text-champagne-gold"></b></div>
+  <button class="w-full px-5 py-3 rounded-xl bg-neon-ice text-surface-obsidian font-headline font-bold text-sm" data-a="open" id="cartCheckout" data-i="checkout"></button>
+ </div>
+</div>
 
 <script>
 /* ===== Настройки. Фото кладутся в assets/programs/<id>.jpg, assets/combos/<id>.jpg, assets/addons/<id>.jpg ===== */
@@ -170,15 +217,15 @@ i:['30 минут; продление — 1,75 ₾ за минуту с учас
 s:['Создаём волшебный шар с зимней фигуркой и кружащимся снегом','We make a magic globe with a winter figurine and swirling snow','ვქმნით ჯადოსნურ გლობუსს ზამთრის ფიგურითა და მოტივტივე თოვლით'],
 d:['Самый атмосферный новогодний сувенир, который остаётся на долгую память. Каждый ребёнок выберет зимнюю фигурку (ёлочку, снеговика, домик или оленя), закрепит её внутри прозрачной баночки, добавит серебристые блёстки, искусственный снег и наполнит шар жидкостью, в которой снежинки плавно парят при встряхивании.','The most atmospheric New Year keepsake, one that stays for years. Each child chooses a winter figurine (a fir tree, a snowman, a little house or a deer), fixes it inside a clear jar, adds silver glitter and artificial snow and fills the globe with a magic liquid in which snowflakes float gently when shaken.','ყველაზე ატმოსფერული საახალწლო სუვენირი, რომელიც დიდხანს შემორჩება. თითოეული ბავშვი აირჩევს ზამთრის ფიგურას (ნაძვი, თოვლის კაცი, სახლი ან ირემი), დაამაგრებს მას გამჭვირვალე ქილაში, დაამატებს ვერცხლისფერ ბრჭყვიალას, ხელოვნურ თოვლს და გლობუსს ავსებს ჯადოსნური სითხით, რომელშიც ფიფქები ნელა ცურავენ შენჯღრევისას.'],
 i:['25–30 минут. Бронь минимум за 2 недели, предоплата 30%. До 10 участников. С клеевым пистолетом работает только взрослый.','25–30 minutes. Book at least 2 weeks ahead, 30% prepayment. Up to 10 participants. Only an adult uses the glue gun.','25–30 წუთი. ჯავშანი მინიმუმ 2 კვირით ადრე, 30% წინასწარი გადახდა. მაქს. 10 მონაწილე. წებოს პისტოლეტით მხოლოდ მოზრდილი მუშაობს.']},
-{id:'choc',ic:'cookie',u:23,max:10,n:['Мастер-класс «Бельгийский шоколад»','Workshop: Belgian chocolate','სახელოსნო „ბელგიური შოკოლადი“'],min:['20 мин + 5 мин заморозка','20 min + 5 min freezing','20 წთ + 5 წთ გაყინვა'],
+{id:'choc',ic:'cookie',u:25,max:10,n:['Мастер-класс «Бельгийский шоколад»','Workshop: Belgian chocolate','სახელოსნო „ბელგიური შოკოლადი“'],min:['20 мин + 5 мин заморозка','20 min + 5 min freezing','20 წთ + 5 წთ გაყინვა'],
 s:['Украшаем бельгийский шоколад и замораживаем на сухом льду','We decorate Belgian chocolate and freeze it on dry ice','ბელგიურ შოკოლადს ვაფორმებთ და მშრალ ყინულზე ვყინავთ'],
 d:['Гастрономический восторг для сладкоежек! Ребята украсят порцию настоящего бельгийского шоколада воздушным маршмеллоу, орешками, сублимированными ягодами и кондитерскими посыпками. А затем произойдёт настоящее чудо: за 5 минут мы мгновенно заморозим сладости в специальном контейнере с сухим льдом, чтобы их можно было сразу съесть или красиво упаковать.','A feast for sweet tooths! The kids decorate a portion of real Belgian chocolate with fluffy marshmallows, nuts, freeze-dried berries and sprinkles. Then comes a little miracle: in 5 minutes we flash-freeze the sweets in a special dry ice container so they can be eaten at once or packed beautifully.','გასტრონომიული აღფრთოვანება ტკბილეულის მოყვარულებისთვის! ბავშვები ნამდვილი ბელგიური შოკოლადის ულუფას მოაწყობენ ჰაეროვანი მარშმელოუთი, თხილეულით, გამხმარი კენკრითა და საკონდიტრო მოსაპნევით. შემდეგ კი ნამდვილი სასწაული ხდება: 5 წუთში ტკბილეულს სპეციალურ მშრალი ყინულის კონტეინერში მყისიერად ვყინავთ, რომ მაშინვე შეჭამონ ან ლამაზად შეფუთონ.'],
 i:['20 минут + 5 минут заморозка. До 10 участников. Укажите при заказе, если у детей есть пищевая аллергия.','20 minutes + 5 minutes of freezing. Up to 10 participants. Tell us at booking if any children have food allergies.','20 წუთი + 5 წუთი გაყინვა. მაქს. 10 მონაწილე. შეკვეთისას მიუთითეთ, თუ ბავშვებს კვებითი ალერგია აქვთ.']},
-{id:'cook',ic:'bakery_dining',u:20,max:10,n:['Мастер-класс «Имбирное печенье»','Workshop: gingerbread cookies','სახელოსნო „ჯანჯაფილის ნამცხვარი“'],min:['15 мин','15 min','15 წთ'],
+{id:'cook',ic:'bakery_dining',u:25,max:10,n:['Мастер-класс «Имбирное печенье»','Workshop: gingerbread cookies','სახელოსნო „ჯანჯაფილის ნამცხვარი“'],min:['15 мин','15 min','15 წთ'],
 s:['Расписываем три имбирных пряника цветной глазурью','We decorate three gingerbread cookies with colourful icing','სამ ჯანჯაფილის ნამცხვარს ვღებავთ ფერადი მინანქრით'],
 d:['Уютный, быстрый и ароматный мастер-класс, который идеально дополняет короткое поздравление. Каждый ребёнок получит набор из 3 фигурных имбирных пряников, кондитерские мешочки с разноцветной глазурью и яркие посыпки. Готовые шедевры упаковываются в нарядный пакетик.','A cosy, quick and fragrant workshop that perfectly complements a short greeting. Each child gets a set of 3 shaped gingerbread cookies, piping bags with colourful icing and bright sprinkles. The finished masterpieces are packed in a festive bag.','მყუდრო, სწრაფი და არომატული სახელოსნო, რომელიც იდეალურად ავსებს მოკლე მილოცვას. თითოეული ბავშვი მიიღებს 3 ფიგურულ ჯანჯაფილის ნამცხვარს, ფერადი მინანქრის საკონდიტრო ტომარებს და ნათელ მოსაპნევს. მზა შედევრები დაიტვირთება სადღესასწაულო პარკში.'],
 i:['15 минут. До 10 участников. Укажите при заказе, если у детей есть пищевая аллергия.','15 minutes. Up to 10 participants. Tell us at booking if any children have food allergies.','15 წუთი. მაქს. 10 მონაწილე. შეკვეთისას მიუთითეთ, თუ ბავშვებს კვებითი ალერგია აქვთ.']},
-{id:'bead',ic:'diamond',u:18,max:10,n:['Мастер-класс «Браслеты, бусы, брелоки»','Workshop: bracelets, beads, keychains','სახელოსნო „სამაჯურები, მძივები, ბრელოკები“'],min:['20–30 мин','20–30 min','20–30 წთ'],
+{id:'bead',ic:'diamond',u:20,max:10,n:['Мастер-класс «Браслеты, бусы, брелоки»','Workshop: bracelets, beads, keychains','სახელოსნო „სამაჯურები, მძივები, ბრელოკები“'],min:['20–30 мин','20–30 min','20–30 წთ'],
 s:['Собираем браслеты, бусы и брелоки из бусин','We make bracelets, necklaces and keychains from beads','ვაწყობთ სამაჯურებს, მძივებსა და ბრელოკებს მძივებისგან'],
 d:['Спокойный творческий мастер-класс, который подходит детям от 4 лет и ребятам, которым нравятся аккуратные занятия руками. Собираем уникальные новогодние украшения или брелоки со снежинками, звёздочками и перламутровыми бусинами.','A calm creative workshop for children aged 4 and up and for kids who enjoy neat handiwork. We assemble unique New Year jewellery or keychains with snowflakes, little stars and pearly beads.','მშვიდი შემოქმედებითი სახელოსნო 4 წლიდან ბავშვებისთვის და მათთვის, ვისაც სუფთა ხელსაქმე უყვარს. ვაწყობთ უნიკალურ საახალწლო სამკაულებს ან ბრელოკებს ფიფქებით, ვარსკვლავებითა და სადაფისფერი მძივებით.'],
 i:['20–30 минут. До 10 участников.','20–30 minutes. Up to 10 participants.','20–30 წუთი. მაქს. 10 მონაწილე.']}];
@@ -207,20 +254,20 @@ cd:['До Нового года 2027:','Until New Year 2027:','2027 წლის
 tab1:['Новогоднее предложение','New Year offer','საახალწლო შეთავაზება'],tab2:['Дополнения','Add-ons','დამატებები'],dk1:['Предложение','Offer','შეთავაზება'],dk2:['Дополнения','Add-ons','დამატებები'],dk3:['Заявка','Order','განაცხადი'],
 combosT:['МЕГА-Мороз: поздравление + приключение','MEGA-Frost: greeting + adventure','მეგა-ყინვა: მილოცვა + თავგადასავალი'],badge:['МЕГА-Мороз','MEGA-Frost','მეგა-ყინვა'],
 progT:['Основные программы','Main programmes','ძირითადი პროგრამები'],
-priceHint:['Цены указаны для Деда Мороза и Снегурочки. Состав персонажей и число детей вы выберете при оформлении — итог пересчитается.','Prices are for Father Frost and the Snow Maiden. You will choose the characters and number of children at checkout and the total will be recalculated.','ფასები მითითებულია ბაბუა ყინვასა და თოვლის გოგონაზე. პერსონაჟებსა და ბავშვების რაოდენობას გაფორმებისას აირჩევთ და ჯამი გადაითვლება.'],
+priceHint:['Цена на карточке указана для Деда Мороза и Снегурочки. При оформлении выберите состав артистов и количество участников: итоговая стоимость пересчитается автоматически.','Card prices are for Father Frost and the Snow Maiden. At checkout, choose the performer lineup and number of participants: the total will update automatically.','ბარათზე მითითებული ფასი ბაბუა ყინვასა და თოვლის გოგონაზეა. გაფორმებისას აირჩიეთ შემსრულებლების შემადგენლობა და მონაწილეთა რაოდენობა: საბოლოო ფასი ავტომატურად გადაითვლება.'],
 pick:['Выбрать','Select','არჩევა'],picked:['✓ Выбрано','✓ Selected','✓ არჩეულია'],add:['Добавить','Add','დამატება'],added:['✓ Добавлено','✓ Added','✓ დამატებულია'],
 know:['Что важно знать','Good to know','რაც უნდა იცოდეთ'],cond:['Условия','Terms','პირობები'],
 perPart:['за участника','per participant','თითო მონაწილეზე'],upTo10:['до 10 детей','up to 10 children','10 ბავშვამდე'],perShow:['за шоу','per show','შოუზე'],
 mainNote:['Цены действуют вместе с основной программой: «{n}».','Prices apply together with the main programme: “{n}”.','ფასები მოქმედებს ძირითად პროგრამასთან ერთად: „{n}“.'],
 needMain:['Дополнения заказываются только вместе с основной программой. Сначала выберите её на вкладке «Новогоднее предложение».','Add-ons are ordered only together with a main programme. Select one first on the “New Year offer” tab.','დამატებები მხოლოდ ძირითად პროგრამასთან ერთად იკვეთება. ჯერ აირჩიეთ ის ჩანართზე „საახალწლო შეთავაზება“.'],
-ext:['Продление ({r} ₾ за минуту с участника)','Extension (₾{r} per minute per participant)','გაგრძელება ({r} ₾ წუთში თითო მონაწილეზე)'],noExt:['Без продления','No extension','გაგრძელების გარეშე'],
+ext:['Продление: {r} ₾ за каждую дополнительную минуту с каждого участника','Extension: ₾{r} for each extra minute per participant','გაგრძელება: {r} ₾ ყოველი დამატებითი წუთისთვის თითო მონაწილეზე'],noExt:['Без продления','No extension','გაგრძელების გარეშე'],extExplain:['Базовая длительность — 30 минут. Можно добавить 15 или 30 минут. Доплата считается за каждого участника: 1,75 ₾ × минуты продления × число участников. Например, +15 минут для 3 детей = 78,75 ₾.','Base duration is 30 minutes. Add 15 or 30 minutes. The extra charge is per participant: ₾1.75 × extra minutes × number of participants. Example: +15 minutes for 3 children = ₾78.75.','საბაზისო ხანგრძლივობა 30 წუთია. შეგიძლიათ დაამატოთ 15 ან 30 წუთი. დამატებითი თანხა ითვლება თითო მონაწილეზე: 1,75 ₾ × დამატებითი წუთები × მონაწილეთა რაოდენობა. მაგალითად, +15 წუთი 3 ბავშვისთვის = 78,75 ₾.'],
 cartEmpty:['Ничего не выбрано','Nothing selected','არაფერია არჩეული'],cartN:['Выбрано позиций: {n}','Items selected: {n}','არჩეულია პოზიცია: {n}'],checkout:['Оформить','Checkout','გაფორმება'],
 tg2:['Трансфер оплачивается отдельно. Подарок предоставляет заказчик.','Transfer is paid separately. The client provides the gift.','ტრანსფერი ცალკე იხდება. საჩუქარს უზრუნველყოფს დამკვეთი.'],
 empty:['Для этой аудитории пока нет программ. Выберите другой фильтр.','No programmes for this audience yet. Choose another filter.','ამ აუდიტორიისთვის პროგრამები ჯერ არ არის. აირჩიეთ სხვა ფილტრი.'],
 stepOf:['Шаг {n} из 4','Step {n} of 4','ნაბიჯი {n} / 4'],sheetT:['Оформление праздника','Plan your party','დღესასწაულის გაფორმება'],
-whoCome:['Кто придёт','Who will come','ვინ მოვა'],kidsL:['Детей на празднике','Children at the party','ბავშვები დღესასწაულზე'],ageL:['Возраст детей','Children’s age','ბავშვების ასაკი'],
+whoCome:['Кто придёт','Who will come','ვინ მოვა'],kidsL:['Детей на празднике','Children at the party','ბავშვები დღესასწაულზე'],kidsControl:['Количество участников','Number of participants','მონაწილეთა რაოდენობა'],artistPrice:['Цена зависит от состава артистов. Дед Мороз и Снегурочка, только Дед Мороз или только Снегурочка. Итог пересчитается автоматически.','The price depends on the performer lineup: Father Frost and the Snow Maiden, Father Frost only, or the Snow Maiden only. The total updates automatically.','ფასი დამოკიდებულია შემსრულებლების შემადგენლობაზე: ბაბუა ყინვა და თოვლის გოგონა, მხოლოდ ბაბუა ყინვა ან მხოლოდ თოვლის გოგონა. ჯამი ავტომატურად გადაითვლება.'],ageL:['Возраст детей','Children’s age','ბავშვების ასაკი'],
 kidsNote:['Сверх {b} детей: доплата {s}','Above {b} children: surcharge {s}','{b} ბავშვზე მეტი: დანამატი {s}'],
-dateL:['Дата праздника','Party date','დღესასწაულის თარიღი'],timeL:['Время начала','Start time','დაწყების დრო'],distL:['Район Тбилиси','Tbilisi district','თბილისის რაიონი'],
+cartTitle:['Ваша корзина','Your selection','თქვენი კალათა'],remove:['Убрать','Remove','წაშლა'],emptyCart:['Пока ничего не выбрано. Добавьте программу и нужные дополнения.','Nothing selected yet. Add a programme and any extras.','ჯერ არაფერია არჩეული. დაამატეთ პროგრამა და დამატებები.'],dateL:['Дата праздника','Party date','დღესასწაულის თარიღი'],timeL:['Время начала','Start time','დაწყების დრო'],distL:['Район Тбилиси','Tbilisi district','თბილისის რაიონი'],
 transferN:['Трансфер оплачивается отдельно, его стоимость назовут при подтверждении.','Transfer is paid separately; its cost will be quoted at confirmation.','ტრანსფერი ცალკე იხდება, მისი ღირებულება დადასტურებისას დაგიზუსტდებათ.'],
 giftsL:['Подарки для детей','Gifts for the children','საჩუქრები ბავშვებისთვის'],wishL:['Пожелания (аллергии, чего боится ребёнок, тихий звук)','Notes (allergies, what the child fears, quiet sound)','შენიშვნები (ალერგიები, რისი ეშინია ბავშვს, ჩუმი ხმა)'],
 sumT:['Итоговый расчёт','Order summary','საბოლოო გაანგარიშება'],total:['Итого','Total','ჯამი'],kidsS:['Детей: {n}','Children: {n}','ბავშვები: {n}'],
@@ -229,9 +276,9 @@ prepayT:['Предоплата: ','Prepayment: ','წინასწარი �
 noAuto:['Заявка не отправляется автоматически: кнопки подготавливают текст и открывают мессенджер. Заявка передана, когда вы отправите там сообщение. Для Telegram текст также копируется в буфер обмена — если он не подставился сам, вставьте его в чат.','The request is not sent automatically: the buttons prepare the text and open a messenger. It is submitted once you send the message there. For Telegram the text is also copied to the clipboard — if it does not appear in the chat, paste it.','განაცხადი ავტომატურად არ იგზავნება: ღილაკები ამზადებს ტექსტს და ხსნის მესენჯერს. განაცხადი გადაცემულია, როცა იქ შეტყობინებას გააგზავნით. Telegram-ისთვის ტექსტი ასევე კოპირდება გაცვლის ბუფერში — თუ ჩატში არ გამოჩნდა, ჩასვით.'],
 tg:['Открыть Telegram','Open Telegram','Telegram-ის გახსნა'],wa:['Открыть WhatsApp','Open WhatsApp','WhatsApp-ის გახსნა'],cp:['Скопировать текст заявки','Copy request text','განაცხადის ტექსტის კოპირება'],cpd:['Текст скопирован','Text copied','ტექსტი დაკოპირდა'],cpf:['Не удалось скопировать','Copy failed','კოპირება ვერ მოხერხდა'],
 back:['Назад','Back','უკან'],next:['Далее','Next','შემდეგ'],
-eName:['Укажите имя.','Enter your name.','მიუთითეთ სახელი.'],ePhone:['Укажите телефон.','Enter your phone.','მიუთითეთ ტელეფონი.'],eDate:['Вернитесь на шаг 2 и выберите дату праздника.','Go back to step 2 and choose the party date.','დაბრუნდით ნაბიჯ 2-ზე და აირჩიეთ თარიღი.'],eDate1:['Выберите дату праздника.','Choose the party date.','აირჩიეთ დღესასწაულის თარიღი.'],
+eName:['Укажите имя.','Enter your name.','მიუთითეთ სახელი.'],ePhone:['Укажите телефон.','Enter your phone.','მიუთითეთ ტელეფონი.'],eDate:['Вернитесь на шаг 2 и выберите дату праздника.','Go back to step 2 and choose the party date.','დაბრუნდით ნაბიჯ 2-ზე და აირჩიეთ თარიღი.'],eDate1:['Выберите дату праздника.','Choose the party date.','აირჩიეთ დღესასწაულის თარიღი.'],ePastDate:['Выберите сегодняшнюю или будущую дату.','Choose today or a future date.','აირჩიეთ დღევანდელი ან მომავალი თარიღი.'],
 leadW:['⚠ Для «{x}» нужна бронь минимум за 14 дней. До выбранной даты: {d} дн. — возможность уточним.','⚠ “{x}” must be booked at least 14 days ahead. Days until the chosen date: {d} — we will check availability.','⚠ „{x}“ უნდა დაჯავშნოთ მინიმუმ 14 დღით ადრე. არჩეულ თარიღამდე: {d} დღე — შესაძლებლობას დაგიზუსტებთ.'],
-part:['уч.','part.','მონ.'],fix:['фикс. цена до 10 детей','fixed price up to 10 children','ფიქსირებული ფასი 10 ბავშვამდე'],extn:['продление','extension','გაგრძელება'],mn:['мин','min','წთ'],tr:['Трансфер оплачивается отдельно.','Transfer is paid separately.','ტრანსფერი ცალკე იხდება.']};
+part:['уч.','part.','მონ.'],fix:['фикс. цена до 10 детей','fixed price up to 10 children','ფიქსირებული ფასი 10 ბავშვამდე'],extn:['продление','extension','გაგრძელება'],mn:['мин','min','წთ'],tr:['Трансфер оплачивается отдельно.','Transfer is paid separately.','ტრანსფერი ცალკე იხდება.'],trustTitle:['Перед заказом: важные детали','Before you book','შეკვეთამდე: მნიშვნელოვანი დეტალები'],trust1t:['Понятный расчёт','Clear pricing','გასაგები ფასი'],trust1:['Вы заранее видите стоимость выбранных услуг. Финальная сумма зависит от программы, дополнений, количества участников и состава артистов. Трансфер рассчитывается отдельно.','You can see the selected services and their price in advance. The final total depends on the programme, add-ons, number of participants and performer lineup. Transfer is calculated separately.','წინასწარ ხედავთ არჩეული მომსახურებების ფასს. საბოლოო თანხა დამოკიდებულია პროგრამაზე, დამატებებზე, მონაწილეთა რაოდენობასა და შემსრულებლების შემადგენლობაზე. ტრანსფერი ცალკე ითვლება.'],trust2t:['Бронирование и подготовка','Booking and preparation','დაჯავშნა და მომზადება'],trust2:['После заявки мы уточним свободное время, адрес и детали площадки. Для 3D-ручки и снежного шара требуется предварительное бронирование и предоплата.','After your request, we confirm availability, address and venue details. The 3D pen and snow globe workshops require advance booking and a deposit.','განაცხადის შემდეგ დავაზუსტებთ თავისუფალ დროს, მისამართსა და სივრცის დეტალებს. 3D კალმისა და თოვლის გლობუსის მასტერკლასებისთვის საჭიროა წინასწარი დაჯავშნა და ავანსი.'],trust3t:['Подготовка пространства','Getting the space ready','სივრცის მომზადება'],trust3:['Для большинства программ достаточно свободного места для игр. Для мастер-классов понадобятся стол и стулья, а для 3D-ручки — розетка. Точные требования согласуем заранее.','Most programmes only need enough free space for games. Workshops need a table and chairs, and the 3D pen also needs a power outlet. We will confirm the exact requirements in advance.','პროგრამების უმეტესობისთვის საკმარისია თავისუფალი სივრცე თამაშებისთვის. მასტერკლასებისთვის საჭიროა მაგიდა და სკამები, 3D კალმისთვის კი ელექტროროზეტი. ზუსტ მოთხოვნებს წინასწარ შევათანხმებთ.'],trust4t:['Язык и индивидуальные пожелания','Language and special requests','ენა და ინდივიდუალური სურვილები'],trust4:['Программу можно согласовать на русском, английском или грузинском языке. Расскажите заранее о возрасте детей, аллергиях, страхах и важных особенностях.','The programme can be arranged in Russian, English or Georgian. Tell us in advance about the children’s ages, allergies, fears and any important needs.','პროგრამის ჩატარება შესაძლებელია რუსულ, ინგლისურ ან ქართულ ენებზე. წინასწარ გვიამბეთ ბავშვების ასაკის, ალერგიების, შიშებისა და მნიშვნელოვანი თავისებურებების შესახებ.'],footerText:['Стоимость трансфера не включена. Дата и время подтверждаются после проверки доступности.','Transfer is not included. Date and time are confirmed after availability is checked.','ტრანსფერი ფასში არ შედის. თარიღი და დრო ხელმისაწვდომობის შემოწმების შემდეგ დასტურდება.']};
 
 const S={info:null,plang:null,lang:0,kids:3,chars:'both',main:null,add:[],n:{},ext:0,flt:'all',tab:'1',step:0,age:0,gift:0,dist:0};
 const g=id=>document.getElementById(id),D=(k,o={})=>{let s=D3[k][S.lang];for(const x in o)s=s.split('{'+x+'}').join(o[x]);return s},T=x=>x[S.lang];
@@ -282,19 +329,26 @@ function render(){
   <div class="relative z-10 p-4 h-full min-h-[170px] flex flex-col justify-between gap-3"><div><span class="px-2.5 py-0.5 rounded-lg bg-coral-berry/20 border border-coral-berry/40 text-coral-berry text-[10px] font-bold">${D('badge')}</span><h3 class="font-headline font-bold text-base mt-2 mb-1">${T(c.n)}</h3><p class="text-xs text-text-secondary">${T(c.t)}</p></div><div class="flex items-center justify-between pt-3 border-t border-white/10"><span class="font-headline font-extrabold text-base text-champagne-gold">${f(sum)}</span><button class="${B1}" data-a="combo" data-i="${c.id}">${D('pick')}</button></div></div></div>`}).join('');
  const ps=P.filter(match);
  g('progs').innerHTML=ps.length?ps.map(x=>{const on=S.main===x.id;
-  return `<article class="p-4 rounded-2xl liquid-glass flex flex-col gap-3"><div data-a="info" data-kind="p" data-id="${x.id}" class="cursor-pointer flex flex-col gap-3"><div class="relative w-full h-28 rounded-xl overflow-hidden bg-gradient-to-br from-deep-indigo via-surface-indigo-depth to-surface-obsidian flex flex-col items-center justify-center gap-1"><span class="material-symbols-outlined text-neon-ice/70 text-[44px]">${x.ic}</span><span class="text-[10px] text-text-muted">${CFG.assets}programs/${x.id}.${CFG.ext}</span>${img('programs',x.id,'absolute inset-0 w-full h-full object-cover')}<div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-lg bg-surface-obsidian/85 text-champagne-gold text-xs font-semibold">${T(x.min)}</div></div>
+  return `<article class="p-4 rounded-2xl liquid-glass flex flex-col gap-3"><div data-a="info" data-kind="p" data-id="${x.id}" class="cursor-pointer flex flex-col gap-3"><div class="relative w-full h-28 rounded-xl overflow-hidden bg-gradient-to-br from-deep-indigo via-surface-indigo-depth to-surface-obsidian flex flex-col items-center justify-center gap-1"><span class="material-symbols-outlined text-neon-ice/70 text-[44px]">${x.ic}</span>${img('programs',x.id,'absolute inset-0 w-full h-full object-cover')}<div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-lg bg-surface-obsidian/85 text-champagne-gold text-xs font-semibold">${T(x.min)}</div></div>
   <div class="flex items-start justify-between gap-3"><h3 class="font-headline font-bold text-base">${T(x.n)}</h3><div class="text-right shrink-0"><div class="font-headline font-extrabold text-lg text-champagne-gold">${f(pm(x))}</div><div class="text-[10px] text-text-muted">${T(x.bt)}</div></div></div>
   <p class="text-xs text-text-secondary leading-relaxed">${T(x.s)}</p></div>
   <div class="flex items-center justify-between"><button class="text-neon-ice text-xs font-bold" data-a="info" data-kind="p" data-id="${x.id}">${D('more')} ›</button><button class="${on?B2:B1}" data-a="main" data-id="${x.id}" aria-pressed="${on}">${on?D('picked'):D('pick')}</button></div></article>`}).join(''):`<p class="text-sm text-text-secondary p-4 rounded-2xl liquid-glass">${D('empty')}</p>`;
  g('addNote').innerHTML=`<div class="p-3.5 rounded-2xl liquid-glass flex items-start gap-2.5"><span class="material-symbols-outlined ${p?'text-neon-ice':'text-coral-berry'} text-[20px] shrink-0">info</span><p class="text-xs text-text-secondary leading-relaxed">${p?D('mainNote',{n:T(p.n)}):D('needMain')}</p></div>`;
  g('adds').innerHTML=A.map(a=>{const on=S.add.includes(a.id),n=nOf(a);
-  const ext=a.ext?`<div data-a="noop" class="flex items-center justify-between gap-2"><label for="ex" class="text-xs text-text-secondary">${D('ext',{r:a.ext})}</label><select id="ex" data-a="ex" style="width:auto"><option value="0">${D('noExt')}</option><option value="15" ${S.ext==15?'selected':''}>+15 ${D('mn')}</option><option value="30" ${S.ext==30?'selected':''}>+30 ${D('mn')}</option></select></div>`:'';
+  const ext=a.ext?`<div data-a="noop" class="flex items-center justify-between gap-2"><label for="ex-${a.id}" class="text-xs text-text-secondary">${D('ext',{r:a.ext})}</label><select id="ex-${a.id}" data-a="ex" style="width:auto"><option value="0">${D('noExt')}</option><option value="15" ${S.ext==15?'selected':''}>+15 ${D('mn')}</option><option value="30" ${S.ext==30?'selected':''}>+30 ${D('mn')}</option></select></div><p class="text-[10px] text-text-muted leading-relaxed">${D('extExplain')}</p>`:'';
   return `<article class="p-4 rounded-2xl liquid-glass flex flex-col gap-3"><div data-a="info" data-kind="a" data-id="${a.id}" class="cursor-pointer flex items-start justify-between gap-3"><div class="flex gap-3"><div class="relative w-16 h-16 shrink-0 rounded-xl overflow-hidden bg-gradient-to-br from-deep-indigo to-surface-indigo-depth flex items-center justify-center"><span class="material-symbols-outlined text-neon-ice/70 text-[28px]">${a.ic}</span>${img('addons',a.id,'absolute inset-0 w-full h-full object-cover')}</div><div><h3 class="font-headline font-bold text-base">${T(a.n)}</h3><span class="text-xs text-champagne-gold">${T(a.min)}</span><p class="text-xs text-text-secondary leading-relaxed mt-1">${T(a.s)}</p></div></div><div class="text-right shrink-0"><div class="font-headline font-extrabold text-base text-champagne-gold">${f(ap(a))}</div><div class="text-[10px] text-text-muted">${a.t==='cryo'?(n>10?D('perShow'):D('upTo10')):a.u+' ₾ '+D('perPart')}</div></div></div>${ext}
   <div class="flex items-center justify-between pt-1"><div class="flex items-center gap-2 p-1 rounded-xl bg-surface-indigo-depth/90"><button class="w-7 h-7 rounded-lg font-bold" data-a="nd" data-id="${a.id}" aria-label="−">−</button><span class="font-headline font-bold text-sm text-neon-ice min-w-[22px] text-center">${n}</span><button class="w-7 h-7 rounded-lg font-bold" data-a="ni" data-id="${a.id}" aria-label="+">+</button></div>
   <div class="flex items-center gap-3"><button class="text-neon-ice text-xs font-bold" data-a="info" data-kind="a" data-id="${a.id}">${D('more')} ›</button><button class="${on?B2:B1} disabled:opacity-40" data-a="add" data-id="${a.id}" ${p||on?'':'disabled'}>${on?D('added'):D('add')}</button></div></div></article>`}).join('');
  g('tot').textContent=g('sheetTot').textContent=f(total());
- const cnt=(p?1:0)+S.add.length;g('cnt').textContent=cnt?D('cartN',{n:cnt}):D('cartEmpty');g('openBtn').disabled=!p;
+ const cnt=(p?1:0)+S.add.length;g('cnt').textContent=cnt?D('cartN',{n:cnt}):D('cartEmpty');g('cartBadge').textContent=cnt;g('openBtn').disabled=!p;renderCart();
  g('stepLbl').textContent=D('stepOf',{n:S.step+1});if(S.step===3)summary();if(S.info)fillInfo()}
+function renderCart(){
+ const p=mainP(),rows=[];
+ if(p)rows.push({id:p.id,type:'p',name:T(p.n),price:pm(p)+sur(),detail:T(p.bt)});
+ S.add.forEach(id=>{const a=A.find(x=>x.id===id);if(a)rows.push({id,type:'a',name:T(a.n),price:ap(a),detail:a.t==='cryo'?D('upTo10'):a.u+' ₾ '+D('perPart')})});
+ g('cartItems').innerHTML=rows.length?rows.map(r=>`<div class="flex items-center justify-between gap-3 p-3 rounded-xl bg-surface-indigo-depth/70"><div class="min-w-0"><div class="text-sm font-semibold">${r.name}</div><div class="text-[10px] text-text-muted">${r.detail}</div></div><div class="flex items-center gap-2 shrink-0"><b class="text-sm text-champagne-gold">${f(r.price)}</b><button class="text-coral-berry text-xs font-bold" data-a="removeCart" data-id="${r.id}" data-kind="${r.type}">${D('remove')}</button></div></div>`).join(''):`<p class="text-sm text-text-secondary p-4 rounded-xl bg-surface-indigo-depth/60">${D('emptyCart')}</p>`;
+ g('cartTotal').textContent=f(total());g('cartCheckout').disabled=!p;g('cartCheckout').classList.toggle('opacity-40',!p);
+}
 function summary(){
  let h=lines().map(l=>`<div class="flex justify-between gap-3 text-xs py-1.5 border-b border-white/5"><span class="text-text-secondary">${l[0]}</span><b class="shrink-0">${f(l[1])}</b></div>`).join('');
  h+=`<div class="text-xs text-text-secondary py-1.5">${D('kidsS',{n:S.kids})} · ${T(AGES[S.age])} · ${D('plangS')}: ${T(LP[pl()])}</div><div class="flex justify-between font-headline font-extrabold text-base pt-2 border-t border-white/10"><span>${D('total')}</span><span class="text-champagne-gold">${f(total())}</span></div>`;
@@ -303,7 +357,7 @@ function summary(){
  g('sum').innerHTML=h}
 function lead(){const w=g('lead'),v=g('fd').value,need=S.add.map(id=>A.find(a=>a.id===id)).filter(a=>a.lead);
  if(!need.length||!v){w.classList.add('hidden');return}
- const d=Math.ceil((new Date(v+'T00:00:00')-new Date().setHours(0,0,0,0))/864e5);
+ const d=Math.ceil((Date.parse(v+'T00:00:00+04:00')-Date.parse(tbDate()+'T00:00:00+04:00'))/864e5);
  if(d<CFG.leadDays){w.classList.remove('hidden');w.textContent=D('leadW',{x:need.map(a=>T(a.n)).join('», «'),d})}else w.classList.add('hidden')}
 function show(n){S.step=n;g('stepLbl').textContent=D('stepOf',{n:n+1});
  document.querySelectorAll('.qv').forEach((v,i)=>{v.classList.toggle('hidden',i!==n);v.classList.toggle('flex',i===n)});
@@ -316,29 +370,33 @@ function text(){return lang0(()=>{const v=g('fd').value,pp=prepay().map(x=>x[0]+
 function fillInfo(){const{k,id}=S.info,isP=k==='p',x=(isP?P:A).find(z=>z.id===id),p=mainP(),on=isP?S.main===id:S.add.includes(id),dir=isP?'programs':'addons';
  const sub=isP?T(x.bt):(x.t==='cryo'?(nOf(x)>10?D('perShow'):D('upTo10')):x.u+' ₾ '+D('perPart')),dis=!isP&&!p&&!on;
  g('infoBody').innerHTML=`<div class="w-10 h-1.5 rounded-full bg-white/20 mx-auto"></div>
- <div class="relative w-full h-36 rounded-2xl overflow-hidden bg-gradient-to-br from-deep-indigo via-surface-indigo-depth to-surface-obsidian flex flex-col items-center justify-center gap-1"><span class="material-symbols-outlined text-neon-ice/70 text-[52px]">${x.ic}</span><span class="text-[10px] text-text-muted">${CFG.assets}${dir}/${x.id}.${CFG.ext}</span>${img(dir,x.id,'absolute inset-0 w-full h-full object-cover')}</div>
+ <div class="relative w-full h-36 rounded-2xl overflow-hidden bg-gradient-to-br from-deep-indigo via-surface-indigo-depth to-surface-obsidian flex flex-col items-center justify-center gap-1"><span class="material-symbols-outlined text-neon-ice/70 text-[52px]">${x.ic}</span>${img(dir,x.id,'absolute inset-0 w-full h-full object-cover')}</div>
  <div class="flex items-start justify-between gap-3"><div><h3 class="font-headline font-bold text-lg">${T(x.n)}</h3><span class="text-xs text-champagne-gold font-semibold">${T(x.min)}</span></div><div class="text-right shrink-0"><div class="font-headline font-extrabold text-lg text-champagne-gold">${f(isP?pm(x):ap(x))}</div><div class="text-[10px] text-text-muted">${sub}</div></div></div>
  <p class="text-sm text-text-secondary leading-relaxed">${T(x.d)}</p>
  <div class="p-3 rounded-xl bg-surface-indigo-depth/70 text-xs text-text-secondary leading-relaxed">${T(x.i)}${isP?'<br>'+D('surRule',{r:f(rate(x)),b:x.base}):''}</div>
  <div class="grid grid-cols-2 gap-2"><button class="px-4 py-3 rounded-xl bg-surface-indigo-depth/80 text-xs font-bold" data-a="closeinfo">${D('closeL')}</button><button class="${on?B2:B1} disabled:opacity-40" data-a="${isP?'main':'add'}" data-id="${id}" data-modal="1" ${dis?'disabled':''}>${on?(isP?D('picked'):D('added')):(isP?D('pick'):D('add'))}</button></div>`}
-function openInfo(){fillInfo();g('info').classList.replace('hidden','flex')}
-function closeInfo(){S.info=null;g('info').classList.replace('flex','hidden')}
-const openS=()=>{g('fd').min=new Date().toISOString().slice(0,10);g('sheet').classList.replace('hidden','flex');show(0)},closeS=()=>g('sheet').classList.replace('flex','hidden');
+function openInfo(){fillInfo();g('info').classList.replace('hidden','flex');lockPage()}
+function closeInfo(){S.info=null;g('info').classList.replace('flex','hidden');unlockPage()}
+function tbDate(){const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tbilisi',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const o={};parts.forEach(x=>o[x.type]=x.value);return `${o.year}-${o.month}-${o.day}`}
+let lockedY=0;
+function lockPage(){if(document.body.classList.contains('page-locked'))return;lockedY=window.scrollY;document.body.classList.add('page-locked');document.body.style.top=`-${lockedY}px`}
+function unlockPage(){if(!document.body.classList.contains('page-locked'))return;document.body.classList.remove('page-locked');document.body.style.top='';window.scrollTo(0,lockedY)}
+const openS=()=>{g('fd').min=tbDate();g('sheet').classList.replace('hidden','flex');lockPage();show(0)},closeS=()=>{g('sheet').classList.replace('flex','hidden');unlockPage()};
 document.addEventListener('click',ev=>{if(ev.target.id==='info'){closeInfo();return}const b=ev.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,id=b.dataset.id,k=b.dataset.k;if(a==='ex'||a==='noop')return;
  if(a==='lang'){S.lang=+k;statics()}
- else if(a==='info'){S.info={k:b.dataset.kind,id};openInfo();return}else if(a==='closeinfo'){closeInfo();return}
+ else if(a==='info'){S.info={k:b.dataset.kind,id};openInfo();return}else if(a==='closeinfo'){closeInfo();return}else if(a==='cart'){renderCart();g('cartModal').classList.replace('hidden','flex');lockPage();return}else if(a==='closecart'){g('cartModal').classList.replace('flex','hidden');unlockPage();return}else if(a==='removeCart'){if(b.dataset.kind==='p'){S.main=null;S.add=[]}else S.add=S.add.filter(x=>x!==id);render();return}
  else if(a==='tab')S.tab=b.dataset.t;else if(a==='ch')S.chars=k;else if(a==='flt')S.flt=k;else if(a==='age')S.age=+k;else if(a==='gift')S.gift=+k;else if(a==='pl')S.plang=+k;
  else if(a==='ki'){S.kids=Math.min(30,S.kids+1);S.n={}}else if(a==='kd'){S.kids=Math.max(1,S.kids-1);S.n={}}
  else if(a==='main'){S.main=S.main===id?null:id;if(!S.main)S.add=[];if(b.dataset.modal)closeInfo()}
  else if(a==='add'){S.add=S.add.includes(id)?S.add.filter(x=>x!==id):[...S.add,id];if(b.dataset.modal)closeInfo()}
  else if(a==='ni'||a==='nd'){const x=A.find(z=>z.id===id);S.n[id]=Math.max(1,Math.min(x.max,nOf(x)+(a==='ni'?1:-1)))}
  else if(a==='combo'){const c=C.find(z=>z.id===b.dataset.i);S.main=c.m;S.add=[...c.a];S.n={};S.tab='2'}
- else if(a==='open'){if(!mainP()){S.tab='1';render();return}openS();render();return}
+ else if(a==='open'){if(!mainP()){S.tab='1';render();return}if(!g('cartModal').classList.contains('hidden')){g('cartModal').classList.replace('flex','hidden');unlockPage()}openS();render();return}
  else if(a==='close'){closeS();return}
  else if(a==='back'){show(S.step-1);return}
- else if(a==='next'){if(S.step===1){if(!g('fd').value){msg('err1','eDate1');return}msg('err1','')}show(S.step+1);return}
+ else if(a==='next'){if(S.step===1){if(!g('fd').value){msg('err1','eDate1');return}if(g('fd').value<tbDate()){msg('err1','ePastDate');return}msg('err1','')}show(S.step+1);return}
  else if(a==='tg'||a==='wa'||a==='cp'){
-  if(!g('fn').value.trim())return msg('err','eName');if(!g('fp').value.trim())return msg('err','ePhone');if(!g('fd').value)return msg('err','eDate');msg('err','');
+  if(!g('fn').value.trim())return msg('err','eName');if(!g('fp').value.trim())return msg('err','ePhone');if(!g('fd').value)return msg('err','eDate');if(g('fd').value<tbDate())return msg('err','ePastDate');msg('err','');
   const tx=text();if(a==='cp'){navigator.clipboard?.writeText(tx).then(()=>g('cpb').textContent=D('cpd'),()=>g('cpb').textContent=D('cpf'));return}
   if(a==='tg')navigator.clipboard?.writeText(tx).catch(()=>{});window.open(a==='wa'?`https://wa.me/${CFG.wa}?text=${encodeURIComponent(tx)}`:`https://t.me/${CFG.tgUser}?text=${encodeURIComponent(tx)}`,'_blank');return}
  render()});
@@ -347,10 +405,12 @@ document.addEventListener('change',ev=>{const t=ev.target;if(t.dataset.a==='ex')
 function drum(cid,did,val){const c=g(cid),cur=g(did),v=String(val).padStart(2,'0');if(!c||cur.textContent===v)return;
  const nx=document.createElement('span');nx.className='drum-digit digit-enter-down'+(cid==='drum-seconds'?' text-white':'');nx.id=did;nx.textContent=v;
  cur.removeAttribute('id');cur.className='drum-digit digit-exit-down';c.appendChild(nx);setTimeout(()=>cur.remove(),380)}
+function moveTimer(){const panel=g('timerPanel'),dock=g('timerDock'),home=g('timerHome');if(!panel||!dock||!home)return;const compact=window.scrollY>150;if(compact&&panel.parentElement!==dock){dock.appendChild(panel);dock.classList.remove('hidden');panel.classList.add('timer-compact')}else if(!compact&&panel.parentElement!==home.firstElementChild){home.firstElementChild.appendChild(panel);dock.classList.add('hidden');panel.classList.remove('timer-compact')}}
+window.addEventListener('scroll',moveTimer,{passive:true});window.addEventListener('resize',moveTimer);
 function tick(){const n=new Date(),tb=new Date(n.getTime()+n.getTimezoneOffset()*6e4+4*36e5);
  g('clock').textContent=tb.toTimeString().split(' ')[0]+' UTC+4';
  const z=Math.max(0,new Date(CFG.ny)-n);
  drum('drum-days','digit-days',Math.floor(z/864e5));drum('drum-hours','digit-hours',Math.floor(z/36e5)%24);drum('drum-minutes','digit-minutes',Math.floor(z/6e4)%60);drum('drum-seconds','digit-seconds',Math.floor(z/1e3)%60)}
-setInterval(tick,1000);tick();statics();render();
+setInterval(tick,1000);tick();g('fd').min=tbDate();statics();render();moveTimer();
 document.addEventListener('click',e=>{if(e.target.closest('[data-a="lang"]')){render();g('cpb').textContent=D('cp')}});
 </script></body></html>
