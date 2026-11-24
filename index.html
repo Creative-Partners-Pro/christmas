@@ -45,13 +45,16 @@ input,select,textarea{background:rgba(30,41,59,.85);border:0;border-radius:12px;
 input:focus,select:focus,textarea:focus{outline:none;box-shadow:0 10px 16px -10px rgba(56,189,248,.9)}
 details>summary{cursor:pointer;color:#38BDF8;font-weight:700;font-size:12px}
 button[data-a="kd"],button[data-a="ki"],button[data-a="nd"],button[data-a="ni"]{background:rgba(255,255,255,.08)}
-/* Переключатель языка: выбранное состояние видно независимо от Tailwind CDN. */
-#langs .lang-btn{min-width:34px;padding:6px 9px;border-radius:8px;color:#94A3B8;font-size:11px;font-weight:800;line-height:1;transition:background .2s,color .2s,box-shadow .2s}
-#langs .lang-btn[aria-pressed="true"]{background:#38BDF8;color:#070B14;box-shadow:0 0 12px rgba(56,189,248,.42)}
-#langs .lang-btn:not([aria-pressed="true"]):hover{color:#fff;background:rgba(255,255,255,.08)}
-/* Появление карточек и секций при входе в область просмотра. */
-.scroll-reveal{opacity:0;transform:translate3d(0,22px,0) scale(.99);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.2,1);will-change:opacity,transform}
-.scroll-reveal.is-visible{opacity:1;transform:translate3d(0,0,0) scale(1)}
+/* Переключатель языка: синий фон строго у текущего языка. */
+#langs .lang-btn{appearance:none;-webkit-appearance:none;min-width:34px;padding:6px 9px;border:0;border-radius:8px;background:transparent!important;color:#94A3B8!important;font-size:11px;font-weight:800;line-height:1;transition:background-color .2s,color .2s,box-shadow .2s}
+#langs .lang-btn[aria-pressed="true"],#langs .lang-btn[data-active="true"]{background:#38BDF8!important;background-color:#38BDF8!important;color:#070B14!important;box-shadow:0 0 12px rgba(56,189,248,.42)!important}
+#langs .lang-btn:not([aria-pressed="true"]):not([data-active="true"]):hover{color:#fff!important;background:rgba(255,255,255,.08)!important}
+/* Все выбранные чипы, вкладки и действия используют единый голубой акцент. */
+.choice-active,.tab-active,.primary-action,.selected-action{background:#38BDF8!important;background-color:#38BDF8!important;color:#070B14!important;border-color:#38BDF8!important;box-shadow:0 0 12px rgba(56,189,248,.32)!important}
+.choice-inactive,.tab-inactive{background:rgba(15,23,42,.82)!important;color:#94A3B8!important;border:1px solid rgba(255,255,255,.10)!important;box-shadow:none!important}
+/* Входящая анимация: плавное всплывание снизу из прозрачности. */
+.scroll-reveal{opacity:0;transform:translate3d(0,34px,0);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);will-change:opacity,transform}
+.scroll-reveal.is-visible{opacity:1;transform:translate3d(0,0,0)}
 @media(prefers-reduced-motion:reduce){.scroll-reveal{opacity:1;transform:none;transition:none;will-change:auto}}
 /* При прокрутке таймер занимает правую часть той же строки, где расположен бренд «МЕГА-Мороз». */
 header>div:nth-child(2){padding-right:280px}
@@ -317,8 +320,8 @@ function lines(){const L=[],p=mainP();
   L.push([T(a.n)+' — '+n+' '+D('part')+' ('+s+')',ap(a)])});return L}
 const prepay=()=>S.add.map(id=>A.find(a=>a.id===id)).filter(a=>a.pre).map(a=>[T(a.n),ap(a)*a.pre,a.pre*100]);
 
-const B1='px-4 py-2 rounded-xl bg-neon-ice text-surface-obsidian text-xs font-bold shadow-[0_0_12px_rgba(56,189,248,0.4)] active:scale-95 transition-transform',B2='px-4 py-2 rounded-xl bg-emerald-accent text-surface-obsidian text-xs font-bold shadow-[0_0_12px_rgba(16,185,129,0.4)] active:scale-95 transition-transform';
-const SEL='bg-neon-ice text-surface-obsidian font-bold shadow-[0_0_10px_rgba(56,189,248,0.4)]',OFF='bg-surface-indigo-depth/80 border border-white/10 text-text-secondary font-semibold';
+const B1='primary-action px-4 py-2 rounded-xl text-xs font-bold active:scale-95 transition-transform',B2='selected-action px-4 py-2 rounded-xl text-xs font-bold active:scale-95 transition-transform';
+const SEL='choice-active font-bold',OFF='choice-inactive font-semibold';
 const chip=(on,a,x)=>`<button ${a} class="shrink-0 px-3 py-2 rounded-xl text-xs transition-all text-left ${on?SEL:OFF}" aria-pressed="${on}">${x}</button>`;
 const img=(dir,id,cls)=>`<img src="${CFG.assets}${dir}/${id}.${CFG.ext}" alt="" loading="lazy" class="${cls}" onerror="this.remove()">`;
 const match=x=>S.flt==='all'||x.tags.includes(S.flt);
@@ -327,7 +330,7 @@ function statics(){document.documentElement.lang=['ru','en','ka'][S.lang];
  document.querySelectorAll('[data-i]').forEach(e=>e.textContent=D(e.dataset.i));
  document.querySelectorAll('[data-ph]').forEach(e=>e.placeholder=D(e.dataset.ph));
  document.querySelectorAll('[data-al]').forEach(e=>e.setAttribute('aria-label',D(e.dataset.al)));
- g('langs').innerHTML=['RU','EN','GE'].map((l,i)=>`<button type="button" data-a="lang" data-k="${i}" class="lang-btn" aria-pressed="${S.lang===i}" aria-label="${['Русский','English','ქართული'][i]}">${l}</button>`).join('')}
+ g('langs').innerHTML=['RU','EN','GE'].map((l,i)=>{const active=S.lang===i;return `<button type="button" data-a="lang" data-k="${i}" class="lang-btn" aria-pressed="${active?'true':'false'}" data-active="${active?'true':'false'}" aria-label="${['Русский','English','ქართული'][i]}">${l}</button>`}).join('')}
 let revealObserver=null;
 function initScrollReveal(){
  const targets=document.querySelectorAll('main > section, #combos > div, #progs > article, #adds > article');
@@ -338,7 +341,7 @@ function initScrollReveal(){
  }),{threshold:.08,rootMargin:'0px 0px -5% 0px'});
  targets.forEach((el,i)=>{if(!el.dataset.revealReady){el.dataset.revealReady='1';el.classList.add('scroll-reveal');el.style.transitionDelay=(Math.min(i%5,4)*65)+'ms';revealObserver.observe(el)}})
 }
-function render(){
+function render(skipRevealAnimation=false){
  const p=mainP(),e=extra();
  g('filters').innerHTML=FL.map(([k,v])=>chip(S.flt===k,`data-a="flt" data-k="${k}"`,T(v))).join('');
  g('fbar').classList.toggle('hidden',S.tab!=='1');
@@ -348,7 +351,7 @@ function render(){
  g('plang').innerHTML=LP.map((x,i)=>chip(pl()===i,`data-a="pl" data-k="${i}"`,T(x))).join('');
  g('gifts').innerHTML=GIFTS.map((x,i)=>chip(S.gift===i,`data-a="gift" data-k="${i}"`,T(x))).join('');
  g('fa').innerHTML=DS.map((x,i)=>`<option value="${i}" ${S.dist===i?'selected':''}>${T(x)}</option>`).join('');
- document.querySelectorAll('.tab-btn').forEach(b=>b.className='tab-btn py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all '+(b.dataset.t===S.tab?'bg-neon-ice text-surface-obsidian shadow-[0_0_14px_rgba(56,189,248,0.45)]':'text-text-secondary'));
+ document.querySelectorAll('.tab-btn').forEach(b=>b.className='tab-btn py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all '+(b.dataset.t===S.tab?'tab-active':'tab-inactive'));
  document.querySelectorAll('.dock').forEach(b=>b.className='dock flex flex-col items-center justify-center gap-1 w-20 h-14 '+(b.dataset.t===S.tab?'text-neon-ice':'text-text-secondary'));
  g('t1').className=S.tab==='1'?'flex flex-col gap-4':'hidden';g('t2').className=S.tab==='2'?'flex flex-col gap-4':'hidden';
  const cs=C.filter(c=>match(P.find(x=>x.id===c.m)));g('combosBox').classList.toggle('hidden',!cs.length);
@@ -369,7 +372,7 @@ function render(){
   <div class="flex items-center gap-3"><button class="text-neon-ice text-xs font-bold" data-a="info" data-kind="a" data-id="${a.id}">${D('more')} ›</button><button class="${on?B2:B1} disabled:opacity-40" data-a="add" data-id="${a.id}" ${p||on?'':'disabled'}>${on?D('added'):D('add')}</button></div></div></article>`}).join('');
  g('tot').textContent=g('sheetTot').textContent=f(total());
  const cnt=(p?1:0)+S.add.length;g('cnt').textContent=cnt?D('cartN',{n:cnt}):D('cartEmpty');g('cartBadge').textContent=cnt;g('openBtn').disabled=!p;renderCart();
- g('stepLbl').textContent=D('stepOf',{n:S.step+1});if(S.step===3)summary();if(S.info)fillInfo();initScrollReveal()}
+ g('stepLbl').textContent=D('stepOf',{n:S.step+1});if(S.step===3)summary();if(S.info)fillInfo();if(skipRevealAnimation){document.querySelectorAll('main > section, #combos > div, #progs > article, #adds > article').forEach(el=>{el.classList.remove('scroll-reveal');el.classList.add('is-visible');el.style.transitionDelay='0ms'})}else initScrollReveal()}
 function renderCart(){
  const p=mainP(),rows=[];
  if(p)rows.push({id:p.id,type:'p',name:T(p.n),price:pm(p)+sur(),detail:T(p.bt)});
@@ -417,7 +420,7 @@ document.addEventListener('click',ev=>{if(ev.target.id==='info'){closeInfo();ret
  else if(a==='ki'){S.kids=Math.min(30,S.kids+1);S.n={}}else if(a==='kd'){S.kids=Math.max(1,S.kids-1);S.n={}}
  else if(a==='main'){S.main=S.main===id?null:id;if(!S.main)S.add=[];if(b.dataset.modal)closeInfo()}
  else if(a==='add'){S.add=S.add.includes(id)?S.add.filter(x=>x!==id):[...S.add,id];if(b.dataset.modal)closeInfo()}
- else if(a==='ni'||a==='nd'){const x=A.find(z=>z.id===id);S.n[id]=Math.max(1,Math.min(x.max,nOf(x)+(a==='ni'?1:-1)))}
+ else if(a==='ni'||a==='nd'){const x=A.find(z=>z.id===id);S.n[id]=Math.max(1,Math.min(x.max,nOf(x)+(a==='ni'?1:-1)));render(true);return}
  else if(a==='combo'){const c=C.find(z=>z.id===b.dataset.i);S.main=c.m;S.add=[...c.a];S.n={};S.tab='2'}
  else if(a==='open'){if(!mainP()){S.tab='1';render();return}if(!g('cartModal').classList.contains('hidden')){g('cartModal').classList.replace('flex','hidden');unlockPage()}openS();render();return}
  else if(a==='close'){closeS();return}
