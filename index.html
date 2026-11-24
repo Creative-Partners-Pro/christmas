@@ -45,8 +45,26 @@ input,select,textarea{background:rgba(30,41,59,.85);border:0;border-radius:12px;
 input:focus,select:focus,textarea:focus{outline:none;box-shadow:0 10px 16px -10px rgba(56,189,248,.9)}
 details>summary{cursor:pointer;color:#38BDF8;font-weight:700;font-size:12px}
 button[data-a="kd"],button[data-a="ki"],button[data-a="nd"],button[data-a="ni"]{background:rgba(255,255,255,.08)}
-#timerDock{position:fixed;z-index:39;top:calc(env(safe-area-inset-top,0px) + 99px);left:0;right:0;max-width:576px;margin:0 auto;padding:0 16px;pointer-events:none}#timerDock #timerPanel{pointer-events:auto;padding:7px 12px;border-radius:0 0 16px 16px;display:flex;align-items:center;gap:10px}#timerDock #timerPanel .grid{display:flex;gap:5px;flex:1}#timerDock #timerPanel .drum-slot{height:30px;min-width:0;border-radius:7px}#timerDock #timerPanel .drum-digit{font-size:15px}#timerDock #timerPanel .grid>div{display:flex;align-items:center;gap:3px;flex:1}#timerDock #timerPanel .grid>div>span{font-size:8px;margin:0!important}#timerDock #timerPanel .mb-3\.5{margin:0!important}#timerDock #timerPanel .flex.items-center.gap-2.mb-3\.5{margin:0!important;white-space:nowrap}#timerDock #timerPanel .absolute{display:none}
-@media(max-width:420px){#timerDock{top:calc(env(safe-area-inset-top,0px) + 99px)}#timerDock #timerPanel{gap:6px;padding:6px 8px}#timerDock #timerPanel .drum-digit{font-size:13px}}
+/* Переключатель языка: выбранное состояние видно независимо от Tailwind CDN. */
+#langs .lang-btn{min-width:34px;padding:6px 9px;border-radius:8px;color:#94A3B8;font-size:11px;font-weight:800;line-height:1;transition:background .2s,color .2s,box-shadow .2s}
+#langs .lang-btn[aria-pressed="true"]{background:#38BDF8;color:#070B14;box-shadow:0 0 12px rgba(56,189,248,.42)}
+#langs .lang-btn:not([aria-pressed="true"]):hover{color:#fff;background:rgba(255,255,255,.08)}
+/* Появление карточек и секций при входе в область просмотра. */
+.scroll-reveal{opacity:0;transform:translate3d(0,22px,0) scale(.99);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.2,1);will-change:opacity,transform}
+.scroll-reveal.is-visible{opacity:1;transform:translate3d(0,0,0) scale(1)}
+@media(prefers-reduced-motion:reduce){.scroll-reveal{opacity:1;transform:none;transition:none;will-change:auto}}
+/* При прокрутке таймер занимает правую часть той же строки, где расположен бренд «МЕГА-Мороз». */
+header>div:nth-child(2){padding-right:280px}
+#timerDock{position:fixed;z-index:41;top:calc(env(safe-area-inset-top,0px) + 36px);left:0;right:0;width:100%;max-width:576px;height:60px;margin:0 auto;padding:0 12px;display:flex;align-items:center;justify-content:flex-end;pointer-events:none}
+#timerDock #timerPanel{pointer-events:auto;width:auto;max-width:44%;padding:0;border:0;border-radius:0;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;display:flex;align-items:center;justify-content:flex-end;gap:0;overflow:visible}
+#timerDock #timerPanel .grid{display:flex;flex:0 0 auto;gap:3px}
+#timerDock #timerPanel .grid>div{display:flex;align-items:center;justify-content:center;flex:0 0 25px;gap:0}
+#timerDock #timerPanel .drum-slot{height:27px;width:25px;min-width:25px;border-radius:7px}
+#timerDock #timerPanel .drum-digit{font-size:13px}
+#timerDock #timerPanel .grid>div>span{display:none!important}
+#timerDock #timerPanel .flex.items-center.gap-2.mb-3\.5{display:none!important}
+#timerDock #timerPanel .absolute{display:none}
+@media(max-width:420px){header>div:nth-child(2){padding-right:calc(42vw + 20px)}#timerDock{padding:0 10px}#timerDock #timerPanel{max-width:42%}#timerDock #timerPanel .grid{gap:2px}#timerDock #timerPanel .grid>div{flex-basis:23px}#timerDock #timerPanel .drum-slot{width:23px;min-width:23px;height:25px}#timerDock #timerPanel .drum-digit{font-size:12px}}
 </style></head>
 <body class="bg-surface-obsidian text-text-primary relative selection:bg-neon-ice selection:text-surface-obsidian">
 <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -309,7 +327,17 @@ function statics(){document.documentElement.lang=['ru','en','ka'][S.lang];
  document.querySelectorAll('[data-i]').forEach(e=>e.textContent=D(e.dataset.i));
  document.querySelectorAll('[data-ph]').forEach(e=>e.placeholder=D(e.dataset.ph));
  document.querySelectorAll('[data-al]').forEach(e=>e.setAttribute('aria-label',D(e.dataset.al)));
- g('langs').innerHTML=['RU','EN','GE'].map((l,i)=>`<button data-a="lang" data-k="${i}" class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${S.lang===i?'bg-neon-ice text-surface-obsidian shadow-[0_0_8px_rgba(56,189,248,0.5)]':'text-text-secondary hover:text-white'}">${l}</button>`).join('')}
+ g('langs').innerHTML=['RU','EN','GE'].map((l,i)=>`<button type="button" data-a="lang" data-k="${i}" class="lang-btn" aria-pressed="${S.lang===i}" aria-label="${['Русский','English','ქართული'][i]}">${l}</button>`).join('')}
+let revealObserver=null;
+function initScrollReveal(){
+ const targets=document.querySelectorAll('main > section, #combos > div, #progs > article, #adds > article');
+ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){targets.forEach(el=>el.classList.add('is-visible'));return}
+ if(!('IntersectionObserver' in window)){targets.forEach(el=>el.classList.add('is-visible'));return}
+ if(!revealObserver)revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+  if(entry.isIntersecting){entry.target.classList.add('is-visible');revealObserver.unobserve(entry.target)}
+ }),{threshold:.08,rootMargin:'0px 0px -5% 0px'});
+ targets.forEach((el,i)=>{if(!el.dataset.revealReady){el.dataset.revealReady='1';el.classList.add('scroll-reveal');el.style.transitionDelay=(Math.min(i%5,4)*65)+'ms';revealObserver.observe(el)}})
+}
 function render(){
  const p=mainP(),e=extra();
  g('filters').innerHTML=FL.map(([k,v])=>chip(S.flt===k,`data-a="flt" data-k="${k}"`,T(v))).join('');
@@ -341,7 +369,7 @@ function render(){
   <div class="flex items-center gap-3"><button class="text-neon-ice text-xs font-bold" data-a="info" data-kind="a" data-id="${a.id}">${D('more')} ›</button><button class="${on?B2:B1} disabled:opacity-40" data-a="add" data-id="${a.id}" ${p||on?'':'disabled'}>${on?D('added'):D('add')}</button></div></div></article>`}).join('');
  g('tot').textContent=g('sheetTot').textContent=f(total());
  const cnt=(p?1:0)+S.add.length;g('cnt').textContent=cnt?D('cartN',{n:cnt}):D('cartEmpty');g('cartBadge').textContent=cnt;g('openBtn').disabled=!p;renderCart();
- g('stepLbl').textContent=D('stepOf',{n:S.step+1});if(S.step===3)summary();if(S.info)fillInfo()}
+ g('stepLbl').textContent=D('stepOf',{n:S.step+1});if(S.step===3)summary();if(S.info)fillInfo();initScrollReveal()}
 function renderCart(){
  const p=mainP(),rows=[];
  if(p)rows.push({id:p.id,type:'p',name:T(p.n),price:pm(p)+sur(),detail:T(p.bt)});
